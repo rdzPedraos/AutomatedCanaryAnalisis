@@ -3,11 +3,16 @@ package main
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 
 	"github.com/aws/aws-lambda-go/events"
-	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/rdzPedraos/AutomatedCanaryAnalisis/src/libraries/calculator"
+	"github.com/rdzPedraos/AutomatedCanaryAnalisis/src/libraries/lambda"
+	"github.com/rdzPedraos/AutomatedCanaryAnalisis/src/libraries/logger"
+	"github.com/rdzPedraos/AutomatedCanaryAnalisis/src/libraries/response"
+)
+
+var (
+	errUnmarshalRequestBody = response.InvalidRequestError("error unmarshalling request body")
 )
 
 type Calculate struct {
@@ -15,38 +20,36 @@ type Calculate struct {
 	Operation calculator.Operation `json:"operation"`
 }
 
-func responseError(statusCode int, err error) (events.APIGatewayV2HTTPResponse, error) {
-	resp, _ := response(statusCode, err.Error())
-	return resp, err
-}
-
-func response(statusCode int, body string) (events.APIGatewayV2HTTPResponse, error) {
-	return events.APIGatewayV2HTTPResponse{
-		StatusCode: statusCode,
-		Body:       body,
-		Headers:    map[string]string{"Content-Type": "application/text"},
-	}, nil
-}
-
 func handler(ctx context.Context, request events.APIGatewayV2HTTPRequest) (events.APIGatewayV2HTTPResponse, error) {
 	var calculate Calculate
+
 	if err := json.Unmarshal([]byte(request.Body), &calculate); err != nil {
-		return responseError(400, err)
+		logger.Error(ctx, "error_unmarshalling_request_body", err)
+
+		return response.Error(errUnmarshalRequestBody)
 	}
 
 	operation, err := calculator.Initialize(calculate.Operation)
 	if err != nil {
-		return responseError(400, err)
+		logger.Error(ctx, "error_initializing_operation", err)
+
+		return response.Error(err)
 	}
 
 	err = operation.SetValues(calculate.Values)
 	if err != nil {
-		return responseError(400, err)
+		logger.Error(ctx, "error_setting_values", err)
+
+		return response.Error(err)
 	}
 
 	result := operation.Calculate()
 
-	return response(200, fmt.Sprintf("%.2f", result))
+	logger.Info(ctx, "calculated_successfully", logger.Obj("result", map[string]any{
+		"value": result,
+	}))
+
+	return response.Success(result)
 }
 
 func main() {
