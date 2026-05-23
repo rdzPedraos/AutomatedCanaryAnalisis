@@ -28,3 +28,16 @@ aws lambda create-function --function-name myFunction \
 --role arn:aws:iam::111122223333:role/lambda-ex \
 --zip-file fileb://myFunction.zip
 ```
+
+## Add commitID in binary
+
+Update command used for compiled binary
+
+```sh
+GOOS=linux GOARCH=amd64 \
+go build \
+-tags lambda.norpc \
+-ldflags="-X github.com/rdzPedraos/AutomatedCanaryAnalisis/src/libraries/logger.commitID=$(git rev-parse HEAD)" \
+-o bootstrap \
+./src/functions/calculate
+```

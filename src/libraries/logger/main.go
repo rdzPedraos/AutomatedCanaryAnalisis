@@ -6,7 +6,6 @@ import (
 	"fmt"
 
 	"github.com/aws/aws-lambda-go/lambdacontext"
-	"github.com/rdzPedraos/AutomatedCanaryAnalisis/src/libraries/envs"
 )
 
 type loggerLevel string
@@ -17,7 +16,7 @@ const (
 )
 
 var (
-	commitID = envs.GetString("COMMIT_ID", "unknown")
+	commitID = "unknown"
 )
 
 type logger struct {
