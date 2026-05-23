@@ -1,9 +1,9 @@
 package calculator
 
-import "errors"
+import "github.com/rdzPedraos/AutomatedCanaryAnalisis/src/libraries/response"
 
 var (
-	ErrInvalidOperation       = errors.New("invalid operation")
-	ErrAtLeastTwoValues       = errors.New("at least two values are required for operation")
-	ErrMandatoryOnlyTwoValues = errors.New("expected only two values are required for operation")
+	ErrInvalidOperation       = response.InvalidRequestError("invalid operation")
+	ErrAtLeastTwoValues       = response.InvalidRequestError("at least two values are required for operation")
+	ErrMandatoryOnlyTwoValues = response.InvalidRequestError("expected only two values are required for operation")
 )

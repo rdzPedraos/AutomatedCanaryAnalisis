@@ -1,14 +1,12 @@
 package calculator
 
-import "fmt"
-
 type SubstractHandler struct {
 	Values []float64 `json:"values"`
 }
 
 func (o *SubstractHandler) SetValues(values []float64) error {
 	if len(values) < 2 {
-		return fmt.Errorf("at least 2 values are required for subtract operation")
+		return ErrAtLeastTwoValues
 	}
 
 	o.Values = values

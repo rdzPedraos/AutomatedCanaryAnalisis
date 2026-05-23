@@ -1,9 +1,9 @@
 package calculator
 
-import "errors"
+import "github.com/rdzPedraos/AutomatedCanaryAnalisis/src/libraries/response"
 
 var (
-	ErrDivisionByZero = errors.New("division by zero")
+	ErrDivisionByZero = response.InvalidRequestError("division by zero")
 )
 
 type DivideHandler struct {
