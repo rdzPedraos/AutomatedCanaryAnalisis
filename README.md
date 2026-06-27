@@ -41,3 +41,21 @@ go build \
 -o bootstrap \
 ./src/functions/calculate
 ```
+
+# [With docker](https://docs.aws.amazon.com/lambda/latest/dg/go-image.html)
+
+## Build
+
+```sh
+docker build --build-arg FUNCTION_NAME=calculate --platform linux/amd64 --provenance=false -t docker-image:test .
+```
+
+## Test
+
+```sh
+# Run process
+docker run -d -p 9000:8080 --entrypoint /usr/local/bin/aws-lambda-rie docker-image:test ./main
+
+# Test endpoint
+curl "http://localhost:9000/2015-03-31/functions/function/invocations" -d '{}'
+```
