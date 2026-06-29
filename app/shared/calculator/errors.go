@@ -1,6 +1,6 @@
 package calculator
 
-import "github.com/rdzPedraos/AutomatedCanaryAnalisis/src/libraries/response"
+import "github.com/rdzPedraos/AutomatedCanaryAnalisis/app/shared/response"
 
 var (
 	ErrInvalidOperation       = response.InvalidRequestError("invalid operation")

@@ -6,7 +6,7 @@ import (
 
 	"github.com/aws/aws-lambda-go/events"
 	root "github.com/aws/aws-lambda-go/lambda"
-	"github.com/rdzPedraos/AutomatedCanaryAnalisis/src/libraries/logger"
+	"github.com/rdzPedraos/AutomatedCanaryAnalisis/app/shared/logger"
 )
 
 type Handler func(context.Context, events.APIGatewayV2HTTPRequest) (events.APIGatewayV2HTTPResponse, error)

@@ -5,10 +5,10 @@ import (
 	"encoding/json"
 
 	"github.com/aws/aws-lambda-go/events"
-	"github.com/rdzPedraos/AutomatedCanaryAnalisis/src/libraries/calculator"
-	"github.com/rdzPedraos/AutomatedCanaryAnalisis/src/libraries/lambda"
-	"github.com/rdzPedraos/AutomatedCanaryAnalisis/src/libraries/logger"
-	"github.com/rdzPedraos/AutomatedCanaryAnalisis/src/libraries/response"
+	"github.com/rdzPedraos/AutomatedCanaryAnalisis/app/shared/calculator"
+	"github.com/rdzPedraos/AutomatedCanaryAnalisis/app/shared/lambda"
+	"github.com/rdzPedraos/AutomatedCanaryAnalisis/app/shared/logger"
+	"github.com/rdzPedraos/AutomatedCanaryAnalisis/app/shared/response"
 )
 
 var (

@@ -1,6 +1,6 @@
 package calculator
 
-import "github.com/rdzPedraos/AutomatedCanaryAnalisis/src/libraries/response"
+import "github.com/rdzPedraos/AutomatedCanaryAnalisis/app/shared/response"
 
 var (
 	ErrDivisionByZero = response.InvalidRequestError("division by zero")
