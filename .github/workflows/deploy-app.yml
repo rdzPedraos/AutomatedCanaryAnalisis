@@ -1,4 +1,4 @@
-name: Deploy Lambda
+name: Deploy Apps
 
 on:
   push:
@@ -19,7 +19,7 @@ jobs:
 
     env:
       AWS_REGION: ${{ vars.AWS_REGION }}
-      FUNCTION_NAME: "ACA-poc-${{ matrix.function }}"
+      FUNCTION_NAME: "ACA-app_${{ matrix.function }}"
 
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
